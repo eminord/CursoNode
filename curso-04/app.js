@@ -1,4 +1,4 @@
-const argv = require('yargs').argv;
+const argv = require('./config/yargs').argv;
 
 let comando = argv._[0];
 
@@ -15,7 +15,7 @@ switch (comando) {
     case 'opcion4':
         //codigo;
         break;
-    case 'opcion5':
+    default:
         //codigo;
         break;
 }
