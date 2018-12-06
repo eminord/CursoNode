@@ -1,19 +1,46 @@
 const argv = require('./config/yargs').argv;
+const porHacer = require('./por-hacer');
+require('colors');
 
+let listado = [];
 let comando = argv._[0];
 
 switch (comando) {
-    case 'opcion1':
-        //codigo;
+    case 'crear':
+        if (porHacer.crear(argv.descripcion)) {
+            console.log('Tarea ', argv.descripcion, ' creada.');
+        } else {
+            console.log('Tarea ', argv.descripcion, ' no creada.');
+        }
+
         break;
-    case 'opcion2':
-        //codigo;
+    case 'actualizar':
+        if (porHacer.actualizar(argv.descripcion, argv.completado)) {
+            console.log('Tarea ', argv.descripcion, ' actualizada.');
+        } else {
+            console.log('Tarea ', argv.descripcion, ' no encontrada.');
+        }
+
         break;
-    case 'opcion3':
-        //codigo;
+    case 'listar':
+
+        let listado = porHacer.getListado();
+
+        for (let tarea of listado) {
+            console.log('=========Por Hacer========='.green);
+            console.log(tarea.descripcion);
+            console.log('Completado => ', tarea.completado);
+            console.log('==========================='.green);
+            console.log('');
+        }
+
         break;
-    case 'opcion4':
-        //codigo;
+    case 'borrar':
+        if (porHacer.borrar(argv.descripcion)) {
+            console.log('Tarea ', argv.descripcion, ' eliminada.');
+        } else {
+            console.log('Tarea ', argv.descripcion, ' no econtrada.');
+        }
         break;
     default:
         //codigo;
